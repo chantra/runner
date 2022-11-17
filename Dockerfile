@@ -30,7 +30,7 @@ RUN apt-get update && apt-get -y install \
 COPY --from=ld-prefix / /usr/x86_64-linux-gnu/
 RUN ln -fs ../lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /usr/x86_64-linux-gnu/lib64/
 #RUN ln -fs /etc/resolv.conf /usr/x86_64-linux-gnu/etc/
-ENV QEMU_LD_PREFIX=/usr/x86_64-linux-gnu
+#ENV QEMU_LD_PREFIX=/usr/x86_64-linux-gnu
 
 # amd64 Github Actions Runner.
 #ARG version=2.299.1
