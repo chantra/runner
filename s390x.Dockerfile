@@ -47,14 +47,8 @@ RUN curl -L https://raw.githubusercontent.com/myoung34/docker-github-actions-run
 RUN useradd -d ${homedir} -m runner
 RUN echo "runner ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 RUN echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >>/etc/sudoers
-# FIXME For some unknown reasons, this is failing to add the user to the kvm
-# group, even though the group is created successfully:
-# https://gist.github.com/chantra/e2fa1ba89d7d47914f919133050fe061
-# We don't really need this for now anyway but may in the future, so leaving an
-# historical trace about the issue.
-# # Make sure kvm group exists. This is a no-op when it does.
-# RUN addgroup --system kvm
-# RUN usermod -a -G kvm runner
+RUN addgroup --system kvm
+RUN usermod -a -G kvm runner
 USER runner
 ENV USER=runner
 WORKDIR ${homedir}
