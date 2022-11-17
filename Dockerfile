@@ -5,6 +5,7 @@ RUN apt-get update && apt-get -y install ca-certificates libicu66 libssl1.1
 FROM s390x/ubuntu:20.04
 # Packages for libbpf testing that are not installed by .github/actions/setup.
 ENV DEBIAN_FRONTEND=noninteractive
+RUN echo $QEMU_LD_PREFIX
 
 RUN apt-get update && apt-get -y install \
         bc \
