@@ -35,7 +35,6 @@ RUN apt-get update && apt-get -y install \
 COPY --from=ld-prefix / /usr/x86_64-linux-gnu/
 RUN ln -fs ../lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /usr/x86_64-linux-gnu/lib64/
 RUN ln -fs /etc/resolv.conf /usr/x86_64-linux-gnu/etc/
-ENV QEMU_LD_PREFIX=/usr/x86_64-linux-gnu
 
 # amd64 Github Actions Runner.
 ARG version=2.299.1
@@ -56,6 +55,9 @@ RUN curl -L https://github.com/actions/runner/releases/download/v${version}/acti
 USER root
 
 VOLUME ${homedir}
+
+# WARNING: This env variable must be set at the end of the file or useradd/groupadd won't work
+ENV QEMU_LD_PREFIX=/usr/x86_64-linux-gnu
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["./bin/Runner.Listener", "run", "--startuptype", "service"]
