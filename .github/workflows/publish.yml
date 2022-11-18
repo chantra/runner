@@ -100,10 +100,6 @@ jobs:
           file: ${{ matrix.dockerfile }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
-          flavor: |
-            latest=auto
-            prefix=
-            suffix=-${{ matrix.arch }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: ${{ matrix.platform }}
 
